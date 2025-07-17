@@ -8,7 +8,6 @@ import {IERC1155Auth} from "./IERC1155Auth.sol";
 import {Roles} from "./Roles.sol";
 
 contract ERC1155Auth is IERC1155Auth, ERC1155, AccessControl {
-
     constructor() ERC1155("000") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
@@ -17,10 +16,7 @@ contract ERC1155Auth is IERC1155Auth, ERC1155, AccessControl {
 
     mapping(uint256 => string) private _tokenURIs;
 
-    function mint(address account, uint256 amount, string memory _tokenURI)
-        public
-        onlyRole(Roles.MINTER_ROLE)
-    {
+    function mint(address account, uint256 amount, string memory _tokenURI) public onlyRole(Roles.MINTER_ROLE) {
         require(amount > 0);
         require(keccak256(abi.encodePacked(_tokenURI)) != keccak256(abi.encodePacked("")));
 
@@ -44,12 +40,7 @@ contract ERC1155Auth is IERC1155Auth, ERC1155, AccessControl {
 
     // The following functions are overrides required by Solidity.
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC1155, AccessControl)
-        returns (bool)
-    {
+    function supportsInterface(bytes4 interfaceId) public view override(ERC1155, AccessControl) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 }

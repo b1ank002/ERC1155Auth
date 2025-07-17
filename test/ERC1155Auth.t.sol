@@ -43,10 +43,12 @@ contract ERC1155AuthTest is Test {
         assertEq(erc1155Auth.uri(0), _tokenURI);
     }
 
-    function test_updateTokenUri_Success(uint256 _amount, string memory _tokenURI, string memory _nextTokenURI) public {
+    function test_updateTokenUri_Success(uint256 _amount, string memory _tokenURI, string memory _nextTokenURI)
+        public
+    {
         vm.assume(_amount > 0);
-        vm.assume(keccak256(abi.encodePacked(_tokenURI)) !=  keccak256(abi.encodePacked("")));
-        vm.assume(keccak256(abi.encodePacked(_nextTokenURI)) !=  keccak256(abi.encodePacked("")));
+        vm.assume(keccak256(abi.encodePacked(_tokenURI)) != keccak256(abi.encodePacked("")));
+        vm.assume(keccak256(abi.encodePacked(_nextTokenURI)) != keccak256(abi.encodePacked("")));
 
         test_mint_Success(_amount, _tokenURI);
 
